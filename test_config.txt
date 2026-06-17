@@ -1,0 +1,47 @@
+# path to input file containing initial conditions of a bacterium #
+C:\Users\Kenzie\Documents\Education\Edinburgh_University\Summer_Masters\BacStroke\Studies\Figure_5/constant_ics/45.txt
+
+# timestep (dt) of simulation [s] #
+0.1
+
+# simulation length [s] #
+100
+
+# rotation rate of clinostat [RPM], 0 = no rotation #
+124.140856
+
+# outer radius of clinostat [m], on circular face # 
+1E-2
+
+# inner radius of clinostat [m], on circular face #
+0.1E-2
+
+# length of clinostat [m], length down z axis #
+1E-2
+
+# density of medium within clinostat [kg/m^3] #
+1000
+
+# acceleration due to gravity [m/s^2], 0 = no gravity #
+9.8
+
+# rotational diffusion coefficient [1/s] #
+0
+
+# viscosity coefficient of medium at room temperature [Pa/s]  1e-3#
+1E-3
+
+# diffusion coefficient of medium at room temperature [m^2/s], 0 = no diffusion 2e-13#
+0
+
+# bacteriums tumbling rate [1/s] #
+0
+
+# is centripetal force on? True = yes, False = no # 
+True
+
+# are boundary conditions present? #
+True
+
+# how often should position and time data be output? [s] #
+10
