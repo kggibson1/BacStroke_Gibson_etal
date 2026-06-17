@@ -427,7 +427,7 @@ sim_params = {
 
 print("\n=== Simulation Parameters ===")
 for key, value in sim_params.items():
-    print(f"{key:30s}: {value}")
+    print(f"{key:30s}: {value}") # format and print each parameter
 print("="*29)
 
 traj = simulate_single_bacterium(
