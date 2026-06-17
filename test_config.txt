@@ -1,5 +1,5 @@
 # path to input file containing initial conditions of a bacterium #
-C:\Users\Kenzie\Documents\Education\Edinburgh_University\Summer_Masters\BacStroke\Studies\Figure_5/constant_ics/45.txt
+Object_initial_conditions/Ecoli.txt
 
 # timestep (dt) of simulation [s] #
 0.1
@@ -8,7 +8,7 @@ C:\Users\Kenzie\Documents\Education\Edinburgh_University\Summer_Masters\BacStrok
 100
 
 # rotation rate of clinostat [RPM], 0 = no rotation #
-124.140856
+10
 
 # outer radius of clinostat [m], on circular face # 
 1E-2
@@ -44,4 +44,4 @@ True
 True
 
 # how often should position and time data be output? [s] #
-10
+1

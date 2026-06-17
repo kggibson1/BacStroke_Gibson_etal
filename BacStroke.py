@@ -355,10 +355,11 @@ def simulate_single_bacterium(
 #python BacStroke_numba_test_single_bacterium.py --config configs/omega=0.txt --output results/run1
 
 # load config #################################################################
-config_path = 'C:/Users/Kenzie/Documents/Education/Edinburgh_University/Summer_Masters/BacStroke/test_config.txt'
+config_path = 'test_config.txt'
 
 config = f.read_config(config_path)
 
+# get each parameter
 dt = float(config[1])
 total_time = float(config[2])
 num_steps = int(round(total_time / dt))
@@ -425,9 +426,10 @@ sim_params = {
     "Initial orientation": swim_dir0,
 }
 
-print("\n=== Simulation Parameters ===")
+# print formatting
+print("\n=== Simulation Parameters ===") # len 29
 for key, value in sim_params.items():
-    print(f"{key:30s}: {value}") # format and print each parameter
+    print(f"{key:30s}: {value}") 
 print("="*29)
 
 traj = simulate_single_bacterium(
@@ -454,8 +456,6 @@ traj = simulate_single_bacterium(
     #seed=42
 )
 
-print("Sim finished")
-
 # save file
 def save_runs(N, traj, output_folder):
     
@@ -481,7 +481,7 @@ def save_run(traj, output_folder):
     filepath = os.path.join(output_folder, "run_1.csv")
 
     print("Saving to:", filepath)
-    print("Trajectory shape:", traj.shape)
+    #print("Trajectory shape:", traj.shape)
 
     np.savetxt(filepath, traj, delimiter=",")
 
@@ -489,6 +489,6 @@ def save_run(traj, output_folder):
     
 #np.save("numba_test_results".replace(".csv", ".npy"), traj)
        
-output_folder = 'C:/Users/Kenzie/Documents/Education/Edinburgh_University/Summer_Masters/Gibson_et_al/BacStroke_output'
+output_folder = 'Output'
 
 save_run(traj, output_folder)
