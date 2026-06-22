@@ -34,7 +34,7 @@ For example,
 python BacStroke.py --config test_config.txt --output Results
 ```
 
-Example configuration files are included with the repository.
+See test_config.txt for an example config file.
 
 ## Model description
 
