@@ -36,6 +36,14 @@ python BacStroke.py --config test_config.txt --output Results
 
 See test_config.txt for an example config file.
 
+## Dependencies
+
+NumPy and Numba are both required:
+
+pip install numpy numba
+
+Note: Functions.py must be in the same directory as BacStroke.py.
+
 ## Model description
 
 The bacterium position **r** evolves according to
@@ -60,15 +68,17 @@ $\frac{d\hat{\mathbf e}}{dt} = \boldsymbol{\omega}\times\hat{\mathbf e} + \sqrt{
 
 The first term describes reorientation due to clinostat rotation and the second describes rotational Brownian motion. The projection operator $I-\hat{\mathbf e}\hat{\mathbf e}^{T}$ ensures that diffusion changes the orientation of the bacterium without changing the magnitude of the unit swimming vector.
 
-In addition to rotational diffusion, the bacterium can undergo stochastic tumbling events. During a tumble a new random swimming direction is selected.
+In addition to rotational diffusion, the bacterium can undergo stochastic tumbling events. If a tumble occurs a new swimming direction is randomly chosen.
 
 ## Input files
 
-The simulation requires a configuration file and an initial-condition file.
+A Config and initial conditions file are required for the simulation. 
 
-The configuration file specifies all simulation parameters, including the timestep, simulation duration, clinostat geometry, fluid properties and organism properties. The initial-condition file specifies the organism radius, initial position, swimming speed and density.
+The config file contains environmental parameters such as clinostat dimensions and rotation, gravitational acceleration, tumbling frequency and more.
 
 See `test_config.txt` for an example.
+
+The initial conditions file contains the organism parameters; mass
 
 ## Output
 
