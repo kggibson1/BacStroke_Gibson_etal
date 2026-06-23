@@ -80,6 +80,12 @@ See `test_config.txt` for an example.
 
 The initial conditions file contains the organism parameters, taking `Object_initial_conditions/Ecoli.txt` as an example:
 
+1E-12 1E-6 0.5E-2 0.5E-2 0.5E-2 0 1027
+
+Mass (kg), radius (m), $x_i$, $y_i$, $z_i$, swimming speed ($v_s$ (m/s)), organism density ( kg m(^{-3}))
+
+where ($x_i$, $y_i$, $z_i$) is the initial position of the organism within the clinostat.
+
 
 ## Output
 
@@ -91,7 +97,7 @@ run_1.csv
 
 with columns
 
-| Column | Description    |
+| Column |    |
 | ------ | -------------- |
 | 1      | x position (m) |
 | 2      | y position (m) |
@@ -102,11 +108,9 @@ Data are written at the output interval specified in the configuration file.
 
 ## Before running
 
-A few simple checks can prevent most user errors.
+All quantities should be in SI units. Lengths should be specified in metres, times in seconds, densities in kg m(^{-3}), viscosities in Pa s and diffusion coefficients in their standard SI units.
 
-First, ensure that all quantities are supplied in SI units. Lengths should be specified in metres, times in seconds, densities in kg m(^{-3}), viscosities in Pa s and diffusion coefficients in their standard SI units.
-
-Second, ensure that the initial position lies inside the clinostat geometry,
+Ensure that the initial position lies inside the clinostat dimensions,
 
 $R_{\mathrm{inner}} < \sqrt{x^2+y^2} < R_{\mathrm{outer}}$,
 
@@ -121,6 +125,8 @@ Ensure the timestep is small enough to resolve any behaviour needing to be obser
 For simulations including rotation we generally followed the rule:
 
 $\Delta t \lesssim \frac{1}{10}\frac{2\pi}{\omega}$
+
+but this may need to be smaller when tumbling and diffusion (behaviours that occur on much smaller timescales) are desired to be observed.
 
 ## Reproducing published results
 
