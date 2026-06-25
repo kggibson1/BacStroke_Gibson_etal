@@ -88,7 +88,7 @@ where the combination $I-\hat{e}_s\otimes\hat{e}_s$ ensures that rotational diff
 
 Tumbling is not included in the rotation vector $\dot{\hat{e}}$; instead, the `tumbles' term means that, at certain times, the bacterium will tumble, instantaneously reorienting. During tumbles, a new orientation is drawn uniformly from the unit sphere. These tumbling events occur randomly with rate $k$, i.e., within each small simulation time-step of length $\Delta t$ there is a probability $k\Delta t$ that the bacterium will tumble.
 
-Boundary conditions are implemented such that a bacterium cannot pass through the walls of the clinostat. If the distance $r'$ of a bacterium's center of mass from the axis of rotation in the $x-y$ plane exceeds $R - a$, then its center of mass position is moved radially to lie $1.1a$ inside the wall. The radial component of the velocity is also removed such that the velocity of the bacterium becomes tangential to the clinostat's wall. An equivalent condition is applied at the inner boundary. Likewise, in the $x-z$ plane the same boundary conditions are applied when the $z$ component of the bacterium's center of mass is within 1$a$ from either end wall, i.e $z > H - a$ or $z < a$. 
+Boundary conditions are implemented such that a bacterium cannot pass through the walls of the clinostat. If the distance $r'$ of a bacterium's center of mass from the axis of rotation in the $x-y$ plane exceeds $R - a$, then its center of mass position is moved radially to lie $1.1 a$ inside the wall. The radial component of the velocity is also removed such that the velocity of the bacterium becomes tangential to the clinostat's wall. An equivalent condition is applied at the inner boundary. Likewise, in the $x-z$ plane the same boundary conditions are applied when the $z$ component of the bacterium's center of mass is within $1a$ from either end wall, i.e $z > H - a$ or $z < a$. 
 
 ## Input files
 
@@ -106,6 +106,7 @@ Mass (kg), radius (m), $x_i$, $y_i$, $z_i$, swimming speed ($v_s$ (m/s)), organi
 
 where ($x_i$, $y_i$, $z_i$) is the initial position of the organism within the clinostat.
 
+The initial condition file is fed into the simulation via the config file.
 
 ## Output
 
