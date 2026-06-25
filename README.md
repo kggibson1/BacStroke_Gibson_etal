@@ -38,13 +38,22 @@ See test_config.txt for an example config file.
 
 ## Dependencies
 
-NumPy and Numba are both required:
+External libraries:
+
+NumPy and Numba are both required.
 
 pip install numpy numba
 
 Note: Functions.py must be in the same directory as BacStroke.py.
 
 ## Model description
+
+Bacterial positions are computed numerically by integrating the Langevin equations of motion for bacterial position $r$ and orientation $\hat{e}_s$.
+
+  $\dot{r}=v = v_g + v_R + v_c + v_T + v_s,$
+
+  $\dot{\hat{e}}_s = \omega_R + \omega_T + \text{tumbles}.$
+
 
 The bacterium position **r** evolves according to
 
