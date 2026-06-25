@@ -54,30 +54,41 @@ Bacterial positions are computed numerically by integrating the Langevin equatio
 
   $\dot{\hat{e}}_s = \omega_R + \omega_T + \text{tumbles}.$
 
+Integration is performed using a velocity Verlet algorithm with simulation timestep $\Delta t$.
 
-The bacterium position **r** evolves according to
+The first term in $\dot{r}$ is the sedimentation velocity $v_g$, given by
 
+  $v_g = -v_g \hat{e}_y,$
 
-$\frac{d\mathbf r}{dt}$ = $\mathbf v_g$ + $\mathbf v_R$ + $\mathbf v_c$ + $\mathbf v_T$ + $\mathbf v_s$
+with $v_g=\Delta m g/\zeta$, $\Delta m = 4\pi a^3\Delta \rho/3$ and $\zeta = 6\pi \eta a$. The velocity $v_R$ due to advection by the clinostat rotation is
 
-where $\mathbf v_g$ is the sedimentation velocity, $\mathbf v_R$ is the velocity induced by clinostat rotation, $\mathbf v_c$ is the centrifugal drift velocity, $\mathbf v_T$ is the translational Brownian velocity and $\mathbf v_s$ is the swimming velocity.
+  $v_R = \omega \times r=v_R\hat{e}_\theta,$
 
-Swimming occurs at constant speed $v_s$,
+The centrifugal velocity $v_c$ is
 
+  $v_c = \frac{\Delta m \omega^2 r'}{\zeta} \hat{e}_{r},$
 
-$\mathbf v_s = v_s \hat{\mathbf e}$,
+with $r'$ being the distance of an organisms centre of mass from the axis of rotation in the $x-y$ plane.
 
+When considering diffusion and swimming, the Langevin equations are those of active Brownian particles. The organism's translational diffusivity $D_T=k_Bt/\zeta$ and rotational diffusivity $D_R=3D_T/4a^2$ are both standard expressions for the thermal diffusivity of a sphere. Diffusion is modeled as white noise, so the instantaneous thermal velocity can diverge. Hence, the thermal velocity $v_T$ is obtained by integrating over a small time interval, specifically the simulation timestep $\Delta t$. Hence, 
 
-where $\hat{\mathbf e}$ is the swimming direction.
+  $v_T=\sqrt{\frac{2D_T}{\Delta t}}\xi$
 
-The swimming direction evolves through a combination of deterministic rotation and rotational diffusion,
+where the noise $\xi$ is uncorrelated 3D Gaussian white noise for which $\langle \xi\rangle = 0$ and $\langle \xi(t) \otimes \xi (t') \rangle = I \delta(t-t')$, where $\langle \cdot \rangle$ is the temporal average, $t$ and $t'$ are two time points, $\delta(\cdot)$ is the Kronecker-delta, $I$ is the 3D identity matrix and $\otimes$ indicates the tensor product. 
 
+The bacterial swimming velocity $v_s$ is
 
-$\frac{d\hat{\mathbf e}}{dt} = \boldsymbol{\omega}\times\hat{\mathbf e} + \sqrt{\frac{2D_R}{\Delta t}}(I-\hat{\mathbf e}\hat{\mathbf e}^{T})\boldsymbol{\xi}.$
+  $v_s=v_s \hat{e}_s\,$
 
-The first term describes reorientation due to clinostat rotation and the second describes rotational Brownian motion. The projection operator $I-\hat{\mathbf e}\hat{\mathbf e}^{T}$ ensures that diffusion changes the orientation of the bacterium without changing the magnitude of the unit swimming vector.
+where $v_s$ is the swimming speed and $\hat{e}_s$ is the unit vector in the swimming direction, whose dynamics are given by \eq{Langevin equation - orientation}. Here, the first term, $\omega_R=\omega\times\hat{e}_s$ corresponds to the deterministic re-orientation produced by the clinostat rotating at rate $\omega=|\omega|$ around the axis $\hat{z}$. The $\omega_T$ term indicates stochastic (random) reorientation due to Brownian motion. As with the thermal velocity, the stochastic term is obtained as an average over the simulation timestep
 
-In addition to rotational diffusion, the bacterium can undergo stochastic tumbling events. If a tumble occurs a new swimming direction is randomly chosen.
+  $\omega_T=\sqrt{\frac{2D_R}{\Delta t}}\xi\cdot(I - \hat{e}_s\otimes\hat{e}_s)$
+  
+where the combination $I-\hat{e}_s\otimes\hat{e}_s$ ensures that rotational diffusion does not change the magnitude of the orientation unit vector.
+
+Tumbling is not included in the rotation vector $\dot{\hat{e}}$; instead, the `tumbles' term means that, at certain times, the bacterium will tumble, instantaneously reorienting. During tumbles, a new orientation is drawn uniformly from the unit sphere. These tumbling events occur randomly with rate $k$, i.e., within each small simulation time-step of length $\Delta t$ there is a probability $k\Delta t$ that the bacterium will tumble.
+
+Boundary conditions are implemented such that a bacterium cannot pass through the walls of the clinostat. If the distance $r'$ of a bacterium's center of mass from the axis of rotation in the $x-y$ plane exceeds $R - a$, then its center of mass position is moved radially to lie $1.1a$ inside the wall. The radial component of the velocity is also removed such that the velocity of the bacterium becomes tangential to the clinostat's wall. An equivalent condition is applied at the inner boundary. Likewise, in the $x-z$ plane the same boundary conditions are applied when the $z$ component of the bacterium's center of mass is within 1$a$ from either end wall, i.e $z > H - a$ or $z < a$. 
 
 ## Input files
 
