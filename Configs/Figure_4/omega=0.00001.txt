@@ -26,7 +26,7 @@ C:/Users/Kenzie/Documents/Education/Edinburgh_University/Summer_Masters/BacStrok
 9.8
 
 # rotational diffusion coefficient [1/s] #
-0.15
+0
 
 # viscosity coefficient of medium at room temperature [Pa/s]  1e-3#
 1E-3
